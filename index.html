@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jagadish Suryadevara — Data Engineer</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0f2744;
+    --blue: #1a56a0;
+    --accent: #2563eb;
+    --light: #f0f4fa;
+    --border: #dde4ef;
+    --text: #1a1a2e;
+    --muted: #5a6478;
+    --white: #ffffff;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; font-size: 15px; }
+
+  nav { background: var(--navy); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; height: 56px; }
+  nav .logo { color: white; font-weight: 600; font-size: 15px; letter-spacing: 0.02em; }
+  nav ul { list-style: none; display: flex; gap: 1.5rem; }
+  nav ul a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+  nav ul a:hover { color: white; }
+
+  .hero { background: var(--navy); color: white; padding: 5rem 2rem 4rem; text-align: center; }
+  .hero .avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--accent); display: inline-flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 600; color: white; margin-bottom: 1.25rem; letter-spacing: 1px; }
+  .hero h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 600; margin-bottom: 0.4rem; }
+  .hero .tagline { color: rgba(255,255,255,0.65); font-size: 15px; margin-bottom: 1.5rem; max-width: 520px; margin-left: auto; margin-right: auto; }
+  .hero .stats { display: flex; justify-content: center; gap: 2.5rem; margin-top: 2rem; flex-wrap: wrap; }
+  .hero .stat { text-align: center; }
+  .hero .stat .num { font-size: 1.75rem; font-weight: 700; color: white; display: block; }
+  .hero .stat .lbl { font-size: 12px; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.06em; }
+  .contact-row { display: flex; gap: 1rem; justify-content: center; margin-top: 1.75rem; flex-wrap: wrap; }
+  .contact-row a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 13px; border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 5px 14px; transition: all 0.2s; }
+  .contact-row a:hover { background: rgba(255,255,255,0.1); color: white; }
+
+  section { padding: 3.5rem 2rem; max-width: 900px; margin: 0 auto; }
+  section h2 { font-size: 1.1rem; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.75rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--accent); display: inline-block; }
+
+  .about-text { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 720px; }
+
+  .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .skill-card { background: var(--light); border-radius: 10px; padding: 1.1rem 1.25rem; border: 1px solid var(--border); }
+  .skill-card h3 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent); margin-bottom: 0.75rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { background: white; border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; font-size: 12px; color: var(--text); }
+
+  .timeline { position: relative; padding-left: 1.5rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 0; width: 2px; background: var(--border); }
+  .job { position: relative; margin-bottom: 2.25rem; }
+  .job::before { content: ''; position: absolute; left: -1.6rem; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid white; outline: 2px solid var(--accent); }
+  .job-header { margin-bottom: 0.5rem; }
+  .job-title { font-size: 15px; font-weight: 600; color: var(--navy); }
+  .job-meta { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .job-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .job-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 0.6rem; }
+  .job-tag { background: #e8f0fe; color: #1a56a0; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; }
+
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .cert-card { border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem; }
+  .cert-card .cert-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--light); display: flex; align-items: center; justify-content: center; margin-bottom: 0.6rem; font-size: 16px; }
+  .cert-card h4 { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+  .cert-card p { font-size: 12px; color: var(--muted); }
+
+  .open-to { background: var(--light); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border); margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; }
+  .open-dot { width: 10px; height: 10px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+  .open-text { font-size: 14px; color: var(--text); }
+  .open-text strong { color: var(--navy); }
+
+  footer { background: var(--navy); color: rgba(255,255,255,0.5); text-align: center; padding: 1.5rem; font-size: 12px; }
+
+  @media (max-width: 600px) {
+    nav ul { gap: 0.75rem; }
+    .hero { padding: 3rem 1.25rem 2.5rem; }
+    section { padding: 2.5rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">Jagadish Suryadevara</span>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="avatar">JS</div>
+  <h1>Jagadish Suryadevara</h1>
+  <p class="tagline">Senior Data Engineer with 10+ years building production data platforms, analytics pipelines, and AI-powered data solutions across fintech, healthcare, and enterprise.</p>
+  <div class="contact-row">
+    <a href="mailto:jagsitrs@gmail.com">jagsitrs@gmail.com</a>
+    <a href="tel:5106842782">510-684-2782</a>
+    <a href="https://linkedin.com/in/jagadishsuryadevara">LinkedIn</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><span class="num">10+</span><span class="lbl">Years Experience</span></div>
+    <div class="stat"><span class="num">3</span><span class="lbl">Cloud Platforms</span></div>
+    <div class="stat"><span class="num">15+</span><span class="lbl">Technologies</span></div>
+    <div class="stat"><span class="num">50+</span><span class="lbl">Projects Delivered</span></div>
+  </div>
+</div>
+
+<section id="about">
+  <h2>About</h2>
+  <div class="open-to">
+    <div class="open-dot"></div>
+    <div class="open-text"><strong>Open to new opportunities.</strong> Available for full-time and select part-time roles in data engineering, analytics, and AI/ML platform development.</div>
+  </div>
+  <p class="about-text">I've spent 10+ years building data infrastructure that teams actually rely on: production ETL/ELT pipelines, data lakes, competitive intelligence platforms, compliance reporting systems, and analytics foundations for data science teams. My work sits at the intersection of engineering and business decisions. I've worked with banking, fintech, lending, and healthcare clients, and I know how to build systems that scale while keeping the data trustworthy. I present to executives regularly and understand that a technically correct pipeline nobody can act on is a failed pipeline.</p>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skill-grid">
+    <div class="skill-card">
+      <h3>Languages</h3>
+      <div class="tags">
+        <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">PySpark</span><span class="tag">Spark SQL</span><span class="tag">R</span><span class="tag">Shell scripting</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Data Engineering</h3>
+      <div class="tags">
+        <span class="tag">Apache Airflow</span><span class="tag">DBT</span><span class="tag">Apache Spark</span><span class="tag">Kafka</span><span class="tag">Hadoop / HDFS</span><span class="tag">Informatica</span><span class="tag">SAP BODS</span><span class="tag">CDC</span><span class="tag">Delta loads</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Cloud Platforms</h3>
+      <div class="tags">
+        <span class="tag">GCP BigQuery</span><span class="tag">GCP Dataflow</span><span class="tag">Cloud Composer</span><span class="tag">Cloud Functions</span><span class="tag">AWS S3</span><span class="tag">AWS Redshift</span><span class="tag">AWS Glue</span><span class="tag">AWS Lambda</span><span class="tag">Azure Synapse</span><span class="tag">Azure Data Factory</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>BI &amp; Visualization</h3>
+      <div class="tags">
+        <span class="tag">Looker</span><span class="tag">Tableau</span><span class="tag">Power BI</span><span class="tag">Mode</span><span class="tag">Cognos</span><span class="tag">OBIEE</span><span class="tag">Data Studio</span><span class="tag">QuickSight</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Databases &amp; Storage</h3>
+      <div class="tags">
+        <span class="tag">Snowflake</span><span class="tag">BigQuery</span><span class="tag">Databricks</span><span class="tag">SQL Server</span><span class="tag">Oracle</span><span class="tag">PostgreSQL</span><span class="tag">Redshift</span><span class="tag">NoSQL</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>AI / LLM &amp; ML</h3>
+      <div class="tags">
+        <span class="tag">LLM integration</span><span class="tag">Prompt engineering</span><span class="tag">RAG pipelines</span><span class="tag">Scikit-learn</span><span class="tag">TensorFlow</span><span class="tag">ML feature pipelines</span><span class="tag">Causal inference</span><span class="tag">Statistical modeling</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Platforms &amp; Tools</h3>
+      <div class="tags">
+        <span class="tag">Palantir Foundry</span><span class="tag">Databricks</span><span class="tag">Oracle Cloud</span><span class="tag">PeopleSoft</span><span class="tag">Salesforce</span><span class="tag">Marketo</span><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Terraform</span><span class="tag">Git</span><span class="tag">CI/CD</span><span class="tag">React</span><span class="tag">Apache NiFi</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h3>Domains</h3>
+      <div class="tags">
+        <span class="tag">Fintech / Lending</span><span class="tag">Competitive intelligence</span><span class="tag">Pricing analytics</span><span class="tag">Healthcare</span><span class="tag">Marketing analytics</span><span class="tag">Compliance reporting</span><span class="tag">Search &amp; discovery</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <h2>Experience</h2>
+  <div class="timeline">
+    <div class="job">
+      <div class="job-header">
+        <div class="job-title">Sr. Data Engineer / Analytics Lead</div>
+        <div class="job-meta">Apex Systems &nbsp;·&nbsp; Jan 2025 – Oct 2025</div>
+      </div>
+      <p class="job-desc">Built pricing analytics data infrastructure for banking and fintech clients. Integrated internal loan pricing data with third-party market rate feeds for competitive benchmarking. Developed observability frameworks that cut downstream reporting incidents by 40%. Managed external data vendor relationships and SLAs.</p>
+      <div class="job-tags">
+        <span class="job-tag">Palantir Foundry</span><span class="job-tag">PySpark</span><span class="job-tag">Airflow</span><span class="job-tag">AWS S3</span><span class="job-tag">Looker</span><span class="job-tag">Tableau</span><span class="job-tag">Python</span>
+      </div>
+    </div>
+    <div class="job">
+      <div class="job-header">
+        <div class="job-title">Sr. Analytics Engineer</div>
+        <div class="job-meta">GDIT &nbsp;·&nbsp; Oct 2023 – Oct 2024</div>
+      </div>
+      <p class="job-desc">Data engineering and analytics for financial services clients. Built competitive pricing intelligence pipelines, marketing attribution data platforms, and ETL workflows across Azure and GCP. Delivered executive dashboards in Looker and Tableau used in quarterly business reviews.</p>
+      <div class="job-tags">
+        <span class="job-tag">Azure Synapse</span><span class="job-tag">GCP BigQuery</span><span class="job-tag">DBT</span><span class="job-tag">Informatica</span><span class="job-tag">SQL</span><span class="job-tag">Looker</span>
+      </div>
+    </div>
+    <div class="job">
+      <div class="job-header">
+        <div class="job-title">Senior Data Engineer / BI Developer</div>
+        <div class="job-meta">Kaiser Permanente &nbsp;·&nbsp; Mar 2013 – Mar 2023</div>
+      </div>
+      <p class="job-desc">Ten years building enterprise data infrastructure at one of the largest healthcare systems in the US. Designed and ran production pipelines on GCP using Airflow and BigQuery. Built financial performance reporting, marketing analytics platforms, and member survey data integration. Presented findings to VP and C-suite leadership regularly.</p>
+      <div class="job-tags">
+        <span class="job-tag">GCP</span><span class="job-tag">BigQuery</span><span class="job-tag">Airflow</span><span class="job-tag">DBT</span><span class="job-tag">Spark</span><span class="job-tag">Tableau</span><span class="job-tag">Power BI</span><span class="job-tag">HIPAA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Education</h2>
+  <div class="job-header" style="margin-bottom:0.25rem;">
+    <div class="job-title">M.S., Computer Science</div>
+    <div class="job-meta">Quantitative coursework in statistics, economics, and data analysis</div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-icon" style="font-size:16px;">✉</div>
+      <h4>Email</h4>
+      <p><a href="mailto:jagsitrs@gmail.com" style="color:#1a56a0;text-decoration:none;">jagsitrs@gmail.com</a></p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon" style="font-size:16px;">☎</div>
+      <h4>Phone</h4>
+      <p>510-684-2782</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon" style="font-size:16px;">in</div>
+      <h4>LinkedIn</h4>
+      <p><a href="https://linkedin.com/in/jagadishsuryadevara" style="color:#1a56a0;text-decoration:none;">linkedin.com/in/jagadishsuryadevara</a></p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon" style="font-size:16px;">↓</div>
+      <h4>Resume</h4>
+      <p style="color:#1a56a0;cursor:pointer;">Download PDF</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Jagadish Suryadevara &nbsp;·&nbsp; Senior Data Engineer &nbsp;·&nbsp; jagsitrs@gmail.com
+</footer>
+
+</body>
+</html>
